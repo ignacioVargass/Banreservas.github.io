@@ -1,8 +1,23 @@
 $(document).ready(function() {
-    // Mostrar y ocultar submenús con una pequeña animación
-    $('.menu li').hover(function() {
-        $(this).children('.submenu').stop(true, true).slideDown(300);
-    }, function() {
-        $(this).children('.submenu').stop(true, true).slideUp(300);
+    // Mostrar submenú de "Personal" por defecto
+    $('.submenu').first().addClass('active');
+
+    // Toggle para mostrar submenús al hacer clic
+    $('.menu-item').on('click', function(e) {
+        e.preventDefault();
+        
+        // Ocultar todos los submenús
+        $('.submenu').removeClass('active');
+        
+        // Mostrar el submenú relacionado
+        $(this).next('.submenu').addClass('active');
+    });
+
+    // Agregar funcionalidad de clic para los submenús
+    $('.submenu-item').on('click', function(e) {
+        e.preventDefault();
+        
+        // Ocultar todos los submenús de nivel inferior
+        $(this).siblings('.dropdown').toggle();
     });
 });

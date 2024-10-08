@@ -1,0 +1,100 @@
+/* Estilos Globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #003366;
+    padding: 10px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #003366;
+    padding: 10px 20px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin-left: auto;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+.menu li a:hover {
+    background-color: #00529B;
+    border-radius: 5px;
+}
+
+/* Estilos para el menú secundario */
+.secondary-nav {
+    background-color: white;
+    padding: 15px 0;
+}
+
+.secondary-menu-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.secondary-menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.secondary-menu li a {
+    color: #003366;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+.secondary-menu li a:hover {
+    background-color: #34e6fd;
+    border-radius: 5px;
+}
+
+/* Estilos del logo dentro del menú */
+.secondary-menu-container .logo {
+    width: 230px; /* Ajusta el tamaño del logo */
+    height: auto;
+}
+
+/* Estilo para lupa */
+.search-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Diseño Responsivo */
+@media (max-width: 768px) {
+    .navbar, .secondary-menu-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu, .secondary-menu {
+        flex-direction: column;
+    }
+}

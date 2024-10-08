@@ -5,48 +5,212 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulación Menú BanReservas</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos para el slider */
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            height: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 400px;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Botones de navegación */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Estilo para el contenedor de submenús */
+        .submenu-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .submenu-container ul {
+            list-style: none;
+            padding: 0;
+            display: flex; /* Muestra los elementos en fila */
+            justify-content: center; /* Centra los elementos */
+        }
+
+        .submenu-container li {
+            margin: 0 15px;
+            cursor: pointer; /* Cambia el cursor al pasar por encima */
+        }
+
+        .submenu-container a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Estilos para la información de los submenús */
+        .info-container {
+            display: none; /* Ocultar por defecto */
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+    </style>
 </head>
 <body>
     <header>
-        <div class="logo-container">
-            <img src="C:\Users\IgnacioVargas\OneDrive - Defensor del Pueblo\Escritorio\UASD\UASD-2024-02\Lab-ProgramIII\Practica II" alt="Logo BanReservas" class="logo">
-        </div>
         <div class="navbar">
             <ul class="menu">
-                <li><a href="#">Personal</a>
-                    <ul class="submenu">
-                        <li><a href="#">Cuentas</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Cuenta de Ahorro en Pesos</a></li>
-                                <li><a href="#">Cuenta Ahorro Más</a></li>
-                                <li><a href="#">Cuenta de Ahorro Infantil</a></li>
-                                <li><a href="#">Cuenta de Ahorro Preserva</a></li>
-                                <li><a href="#">Cuenta de Ahorro en Dólares</a></li>
-                                <li><a href="#">Cuenta de Ahorro en Euros</a></li>
-                                <li><a class="ver-todos" href="#">Ver todos</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Inversiones</a></li>
-                        <li><a href="#">Tarjetas</a></li>
-                        <li><a href="#">Préstamos</a></li>
-                        <li><a href="#">Seguros</a></li>
-                        <li><a href="#">Remesas</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Preferente</a></li>
-                <li><a href="#">PYME</a></li>
-                <li><a href="#">Empresarial</a></li>
-                <li><a href="#">Gubernamental</a></li>
+                <li><a href="#">Canales Banreservas</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Mapa</a></li>
+                <li><a href="#">Calculadora</a></li>
+                <li><a href="#">Acceder a TuBanco</a></li>
+                <li class="search"><a href="#"><img src="search-icon.png" alt="Buscar" class="search-icon"></a></li>   
             </ul>
         </div>
     </header>
 
+    <nav class="secondary-nav">
+        <div class="secondary-menu-container">
+            <img src="Logo-banreservas.png" alt="Logo BanReservas" class="logo">
+            <ul class="secondary-menu">
+                <li class="menu-item">
+                    <a href="#">PERSONAL</a>
+                    <a href="#">PREFERENTE</a>
+                    <a href="#">EMPRESARIAL</a>
+                    <a href="#">GUBERNAMENTAL</a>
+                    <a href="#">INTERNACIONAL</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenedor de submenús dinámicos -->
+    <div class="submenu-container" id="submenu-container">
+        <ul id="dynamic-submenu">
+            <li data-info="info-preferente">Preferente</li>
+            <li data-info="info-pyme">PYME</li>
+            <li data-info="info-empresarial">Empresarial</li>
+            <li data-info="info-gubernamental">Gubernamental</li>
+            <li data-info="info-internacional">Internacional</li>
+        </ul>
+    </div>
+
+    <!-- Contenedor para mostrar información -->
+    <div class="info-container" id="info-container">
+        <div id="info-preferente" class="info" style="display: none;">Información sobre Preferente.</div>
+        <div id="info-pyme" class="info" style="display: none;">Información sobre PYME.</div>
+        <div id="info-empresarial" class="info" style="display: none;">Información sobre Empresarial.</div>
+        <div id="info-gubernamental" class="info" style="display: none;">Información sobre Gubernamental.</div>
+        <div id="info-internacional" class="info" style="display: none;">Información sobre Internacional.</div>
+    </div>
+
+    <!-- Slider de imágenes -->
+    <div class="slider-container">
+        <div class="slides">
+            <div class="slide"><img src="imagen1.jpg" alt="Imagen 1"></div>
+            <div class="slide"><img src="imagen2.jpg" alt="Imagen 2"></div>
+            <div class="slide"><img src="imagen3.jpg" alt="Imagen 3"></div>
+        </div>
+        <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    </div>
+
     <main>
-        <h1>Bienvenido a Nuestro Sitio</h1>
+        <h1>Bienvenido a BanReservas</h1>
         <p>Este es un menú de ejemplo que simula la funcionalidad del sitio BanReservas.</p>
+        <p>Explore nuestros servicios de cuentas, préstamos, seguros y más.</p>
     </main>
 
+    <footer>
+        <p>© 2024 BanReservas. Todos los derechos reservados.</p>
+    </footer>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="scripts.js"></script>
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelector('.slides');
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function showSlides() {
+            slideIndex++;
+            if (slideIndex >= totalSlides) {
+                slideIndex = 0;
+            }
+            slides.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+            updateInfo(slideIndex);
+        }
+
+        function plusSlides(n) {
+            slideIndex += n;
+            if (slideIndex >= totalSlides) {
+                slideIndex = 0;
+            } else if (slideIndex < 0) {
+                slideIndex = totalSlides - 1;
+            }
+            slides.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+            updateInfo(slideIndex);
+        }
+
+        function updateInfo(index) {
+            // Ocultar todos los contenedores de información
+            const infoContainers = document.querySelectorAll('.info-container .info');
+            infoContainers.forEach(info => info.style.display = 'none');
+
+            // Mostrar la información relacionada con el slide actual
+            const currentInfo = document.querySelectorAll('.submenu-container li')[index];
+            if (currentInfo) {
+                const infoId = currentInfo.getAttribute('data-info');
+                document.getElementById(infoId).style.display = 'block';
+            }
+        }
+
+        document.querySelectorAll('.submenu-container li').forEach((item, index) => {
+            item.addEventListener('mouseover', () => {
+                // Ocultar toda la información primero
+                const infoContainers = document.querySelectorAll('.info-container .info');
+                infoContainers.forEach(info => info.style.display = 'none');
+
+                // Mostrar la información correspondiente al submenú
+                const infoId = item.getAttribute('data-info');
+                document.getElementById(infoId).style.display = 'block';
+
+                // Cambiar el índice del slider para que coincida con el submenú
+                slideIndex = index;
+                slides.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+            });
+        });
+
+        setInterval(showSlides, 3000); // Cambia de imagen cada 3 segundos
+    </script>
 </body>
 </html>
